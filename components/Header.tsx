@@ -1,21 +1,22 @@
 'use client';
 import Link from 'next/link';
-import type {RootState} from '@/store';
+import {ShoppingBagItem} from '@/types';
 import {useSelector} from 'react-redux';
 import {useState, useEffect} from 'react';
 import {usePathname} from 'next/navigation';
 import {LuShoppingBag} from 'react-icons/lu';
 import {NAV_LINKS} from '@/constants/content';
 
+
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const shoppingBag = useSelector((store: RootState) => store.shoppingBag.items)
+  const shoppingBag = useSelector((store: any) => store.shoppingBag.items)
   const currentSection = usePathname().replace('/', '');
 
   useEffect(() => {
     // count total quantity of items in the shopping bag
-    const quantity = shoppingBag.reduce((acc, item) => acc + item.quantity, 0);
+    const quantity = shoppingBag.reduce((acc: number, item: ShoppingBagItem) => acc + item.quantity, 0);
     setTotalQuantity(quantity);
   }, [shoppingBag]);
 
