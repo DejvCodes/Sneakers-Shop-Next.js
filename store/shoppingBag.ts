@@ -1,35 +1,43 @@
-import {ShoppingBagState} from "@/types";
-import {createSlice} from "@reduxjs/toolkit";
+import {ShoppingBagState} from '@/types';
+import {createSlice} from '@reduxjs/toolkit';
 
-// Initial state of the shopping bag
+// initial state of the shopping bag
 const initialState: ShoppingBagState = {
   items: [],
   notification: false,
 }
 
 const shoppingBagSlice = createSlice({
-  name: "shoppingBag", // Name of the slice
-  initialState, // Initial state
+  name: 'shoppingBag', // name of the slice
+  initialState, // initial state
   reducers: {
     addToShoppingBag(state, action) {
       const { productId, quantity } = action.payload;
 
-      // Check if the product already exists in the shopping bag
+      // check if the product already exists in the shopping bag
       const existingProduct = state.items.find((item) => item.productId === productId);
       
       if (existingProduct) {
-        existingProduct.quantity += quantity; // Update quantity if it exists
+        existingProduct.quantity += quantity; // update quantity if it exists
       } else {
-        state.items.push({ productId, quantity }); // Add new product if it doesn't exist
+        state.items.push({ productId, quantity }); // add new product if it doesn't exist
       }
-
+      // console.log(current(state.items));
+    },
+    showNotification(state) {
+      state.notification = true; // show notification
+    },
+    hideNotification(state) {
+      state.notification = false; // hide notification
     }
   }
 })
 
-// Exporting the action to add items to the shopping bag
+// exporting the action to add items to the shopping bag
 export const { 
-  addToShoppingBag 
+  addToShoppingBag,
+  showNotification,
+  hideNotification
 } = shoppingBagSlice.actions;
 
 export default shoppingBagSlice.reducer;

@@ -4,20 +4,24 @@ import formatPrice from './FormatPrice';
 import {useDispatch} from 'react-redux';
 import type {ProductCard} from '@/types';
 import {LuShoppingBag} from 'react-icons/lu';
-import {addToShoppingBag} from '@/store/shoppingBag';
+import {addToShoppingBag, hideNotification, showNotification} from '@/store/shoppingBag';
 
 const ProductCard = ({id, fullName, price, image, slug} : ProductCard) => {
   const dispatch = useDispatch();
 
   // add function + notif
   const handleAddToBag = () => {
-    // Dispatching action to add item to shopping bag
+    // dispatching action to add item to shopping bag
     dispatch(addToShoppingBag({
       productId: id,
       quantity: 1
-    }))
-    // notif
-  }
+    }));
+    // notification
+    dispatch(showNotification());
+    setTimeout(() => {
+      dispatch(hideNotification());
+    }, 2000)
+  };
 
   return <div 
     className='
