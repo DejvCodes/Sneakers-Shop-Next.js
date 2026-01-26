@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #171717;
+
+  --white-color: #FFFFFF;
+  --text-color: #2D2D2C;
+  --turquoise-color: #19DFD9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-turquoise: var(--turquoise-color);
+  --font-primary: 'Public Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  background: var(--background);
+  font-family: var(--font-primary);
+}
+ul {
+  list-style: none;;
+}
+img {
+  width: 100%;
+  height: 100%;
+}
