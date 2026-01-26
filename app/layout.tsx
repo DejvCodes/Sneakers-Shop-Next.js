@@ -11,7 +11,7 @@ const publicSans = Public_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Sneakers Store',
+  title: 'Sneakers Shop',
   description: 'Your one-stop shop for the latest and greatest sneakers.',
 };
 
