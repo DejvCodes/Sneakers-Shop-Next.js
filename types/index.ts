@@ -36,3 +36,16 @@ export interface ShoppingBagState {
 	items: ShoppingBagItem[];
 	notification: boolean;
 }
+
+export interface ProductDetails {
+	slug: string;
+	image: string;
+	images: string[];
+	brand: string;
+	name: string;
+	type: string;
+	price: number;
+	info: string;
+	season?: string[]|null;
+	productCode: string;
+}

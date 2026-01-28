@@ -3,7 +3,6 @@
 :root {
   --background: #FFFFFF;
   --foreground: #171717;
-
   --white-color: #FFFFFF;
   --text-color: #2D2D2C;
   --turquoise-color: #19DFD9;
@@ -32,12 +31,10 @@ img {
   width: 100%;
   height: 100%;
 }
-
 @keyframes slideInRight {
   from {opacity: 0; transform: translateX(100%);}
   to {opacity: 1; transform: translateX(0);}
 }
-
 @keyframes slideOutRight {
   from {opacity: 1; transform: translateX(0);}
   to { opacity: 0; transform: translateX(100%);}

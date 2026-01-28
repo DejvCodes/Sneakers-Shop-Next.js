@@ -1,1 +1,1 @@
-Sneakers shop v 
+Sneakers shop

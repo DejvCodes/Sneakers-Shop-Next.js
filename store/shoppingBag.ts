@@ -33,7 +33,7 @@ const shoppingBagSlice = createSlice({
 	}
 })
 
-// exporting the action to add items to the shopping bag
+// exporting actions
 export const {
 	addToShoppingBag,
 	showNotification,

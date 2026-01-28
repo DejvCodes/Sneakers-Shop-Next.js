@@ -9,6 +9,7 @@ const Products = () => {
 	const [searchingProduct, setSearchingProduct] = useState('');
 	const [filteredProducts, setFilteredProducts] = useState<Sneaker[]>(sneakers);
 
+	// filter of products
 	useEffect(() => {
 		const productsAfterFilter = sneakers.filter((oneSneaker) => {
 			return oneSneaker.fullName.toLowerCase().includes(searchingProduct.toLowerCase());
