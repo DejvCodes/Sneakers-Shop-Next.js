@@ -5,12 +5,12 @@ import {ShoppingBagItem} from '@/types';
 const ShoppingBag = () => {
 	const shoppingBag = useSelector((store: any) => store.shoppingBag.items);
 
-	return <div className='min-h-screen pt-20 px-4 md:px-8 lg:px-20 pb-10'>
-		<div className='max-w-6xl mx-auto'>
+	return <div className='min-h-screen pt-20 lg:px-20 pb-10'>
+		<div className='max-w-7xl mx-auto px-4'>
 			<h1 className='text-2xl md:text-3xl font-bold uppercase mb-6 md:mb-8'>
 				Nákupní košík
 			</h1>
-			
+
 			{shoppingBag.length === 0 ? (
 				<div className='text-center py-12 md:py-20'>
 					<p className='text-base md:text-lg text-gray-600'>
