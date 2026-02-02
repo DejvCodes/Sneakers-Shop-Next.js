@@ -1,11 +1,20 @@
 import {ShoppingBagState} from '@/types';
 import {createSlice} from '@reduxjs/toolkit';
 
+// load shopping bag from localStorage
+const loadFromLocalStorage = (): ShoppingBagState => {
+	if (typeof window !== 'undefined') {
+		const savedBag = localStorage.getItem('shoppingBag');
+
+		if (savedBag) {
+			return JSON.parse(savedBag);
+		}
+	}
+	return { items: [], notification: false };
+};
+
 // initial state of the shopping bag
-const initialState: ShoppingBagState = {
-	items: [],
-	notification: false,
-}
+const initialState: ShoppingBagState = loadFromLocalStorage();
 
 const shoppingBagSlice = createSlice({
 	name: 'shoppingBag', // name of the slice
@@ -22,7 +31,11 @@ const shoppingBagSlice = createSlice({
 			} else {
 				state.items.push({ productId, quantity }); // add new product if it doesn't exist
 			}
-			// console.log(current(state.items));
+
+			// save updated shopping bag to localStorage
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('shoppingBag', JSON.stringify({ items: state.items, notification: false }));
+			}
 		},
 		changeQuantity(state, action) {
 			const { productId, quantity } = action.payload;
@@ -36,11 +49,21 @@ const shoppingBagSlice = createSlice({
 				// remove the product if quantity is zero
 				state.items = state.items.filter((item) => item.productId !== productId);
 			}
+
+			// save updated shopping bag to localStorage
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('shoppingBag', JSON.stringify({ items: state.items, notification: false }));
+			}
 		},
 		deleteProduct(state, action) {
 			const { productId } = action.payload;
 			// remove the product from the shopping bag
 			state.items = state.items.filter((item) => item.productId !== productId);
+
+			// save updated shopping bag to localStorage
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('shoppingBag', JSON.stringify({ items: state.items, notification: false }));
+			}
 		},
 		showNotification(state) {
 			state.notification = true; // show notification
@@ -49,7 +72,7 @@ const shoppingBagSlice = createSlice({
 			state.notification = false; // hide notification
 		}
 	}
-})
+});
 
 // exporting actions
 export const {
