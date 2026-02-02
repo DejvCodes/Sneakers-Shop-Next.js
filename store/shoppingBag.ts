@@ -24,6 +24,24 @@ const shoppingBagSlice = createSlice({
 			}
 			// console.log(current(state.items));
 		},
+		changeQuantity(state, action) {
+			const { productId, quantity } = action.payload;
+
+			// find the product in the shopping bag
+			const existingProduct = state.items.find((item) => item.productId === productId);
+
+			if (existingProduct && quantity > 0) {
+				existingProduct.quantity = quantity; // update quantity
+			} else {
+				// remove the product if quantity is zero
+				state.items = state.items.filter((item) => item.productId !== productId);
+			}
+		},
+		deleteProduct(state, action) {
+			const { productId } = action.payload;
+			// remove the product from the shopping bag
+			state.items = state.items.filter((item) => item.productId !== productId);
+		},
 		showNotification(state) {
 			state.notification = true; // show notification
 		},
@@ -36,6 +54,8 @@ const shoppingBagSlice = createSlice({
 // exporting actions
 export const {
 	addToShoppingBag,
+	changeQuantity,
+	deleteProduct,
 	showNotification,
 	hideNotification
 } = shoppingBagSlice.actions;

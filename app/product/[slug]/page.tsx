@@ -1,17 +1,19 @@
 'use client';
 import Link from 'next/link';
 import {Sneaker} from '@/types';
+import {useDispatch} from 'react-redux';
 import {useState, useEffect} from 'react';
 import {sneakers} from '@/constants/sneakers';
 import {FaArrowLeftLong} from 'react-icons/fa6';
 import formatPrice from '@/components/FormatPrice';
 import {CiSquareMinus, CiSquarePlus} from 'react-icons/ci';
+import {addToShoppingBag, hideNotification, showNotification} from '@/store/shoppingBag';
 
 const ProductDetails = ({ params }: { params: { slug: string } }) => {
+	const dispatch = useDispatch()
 	const [slug, setSlug] = useState<string>('');
+	const [quantity, setQuantity] = useState<number>(1);
 	const [productDetails, setProductDetails] = useState<Sneaker|null>(null);
-
-	const quantity = 1; // Placeholder for quantity state
 
 	useEffect(() => {
 		// get slug from params
@@ -44,6 +46,30 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 
 	// destructuring
 	const {id, name, brand, type, price, image, images, season, info, productCode} = productDetails;
+
+	// handle minus quantity
+	const handleMinusQuantity = () => {
+		setQuantity(quantity - 1 ? quantity - 1 : 1);
+	};
+
+	// handle plus quantity
+	const handlePlusQuantity = () => {
+		setQuantity(quantity + 1);
+	};
+
+	const handleAddToBag = () => {
+		// dispatch add to shopping bag action
+		dispatch(addToShoppingBag({
+			productId: id,
+			quantity: quantity
+		}));
+		// dispatch show notification action
+		dispatch(showNotification());
+		// hide notification
+		setTimeout(() => {
+      dispatch(hideNotification());
+    }, 1500);
+	};
 
 	return <section
 		id={`product-${id}-${name}`}
@@ -122,7 +148,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 								<button
 									type='button'
 									className='hover:bg-gray-200 transition-colors px-2 py-3 cursor-pointer'
-									// onClick
+									onClick={handleMinusQuantity}
 								>
 									<CiSquareMinus className='text-xl sm:text-2xl' />
 								</button>
@@ -132,7 +158,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 								<button
 									type='button'
 									className='hover:bg-gray-200 transition-colors px-2 py-3 cursor-pointer'
-									// onClick
+									onClick={handlePlusQuantity}
 								>
 									<CiSquarePlus className='text-xl sm:text-2xl' />
 								</button>
@@ -140,6 +166,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 							<button
 								type='button'
 								className='flex items-center justify-center bg-black text-white text-center text-xs sm:text-sm font-semibold uppercase rounded-lg hover:scale-102 transition-all duration-200 shadow-lg py-4 px-6 sm:px-8 cursor-pointer'
+								onClick={handleAddToBag}
 							>
 								Přidat do košíku
 							</button>
