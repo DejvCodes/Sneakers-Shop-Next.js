@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import formatPrice from './FormatPrice';
 import {useDispatch} from 'react-redux';
 import type {ProductCard} from '@/types';
 import {LuShoppingBag} from 'react-icons/lu';
@@ -41,7 +40,7 @@ const ProductCard = ({id, fullName, price, image, slug}: ProductCard) => {
 			{fullName}
 		</h2>
 		<div className='flex flex-row items-center justify-between'>
-			<p className='text-sm'>{formatPrice(price)}</p>
+			<p className='text-sm'>{price.toLocaleString('cs-CZ')} Kč</p>
 			<button
 				onClick={handleAddToBag}
 				className='text-xl transition-all duration-200 ease-linear hover:text-turquoise hover:-translate-y-1 cursor-pointer'

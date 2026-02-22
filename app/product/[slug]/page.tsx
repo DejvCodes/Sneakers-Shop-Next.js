@@ -5,15 +5,14 @@ import {useDispatch} from 'react-redux';
 import {useState, useEffect} from 'react';
 import {sneakers} from '@/constants/sneakers';
 import {FaArrowLeftLong} from 'react-icons/fa6';
-import formatPrice from '@/components/FormatPrice';
 import {CiSquareMinus, CiSquarePlus} from 'react-icons/ci';
 import {addToShoppingBag, hideNotification, showNotification} from '@/store/shoppingBag';
 
 const ProductDetails = ({ params }: { params: { slug: string } }) => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const [slug, setSlug] = useState<string>('');
 	const [quantity, setQuantity] = useState<number>(1);
-	const [productDetails, setProductDetails] = useState<Sneaker|null>(null);
+	const [productDetails, setProductDetails] = useState<Sneaker | null>(null);
 
 	useEffect(() => {
 		// get slug from params
@@ -27,7 +26,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 	useEffect(() => {
 		if (!slug) return;
 		// find product by slug
-		const findProductDetails: Sneaker|undefined = sneakers.find((oneProduct) => {
+		const findProductDetails: Sneaker | undefined = sneakers.find((oneProduct) => {
 			return oneProduct.slug === slug
 		})
 		if (findProductDetails) {
@@ -45,7 +44,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 	}
 
 	// destructuring
-	const {id, name, brand, type, price, image, images, season, info, productCode} = productDetails;
+	const { id, name, brand, type, price, image, images, season, info, productCode } = productDetails;
 
 	// handle minus quantity
 	const handleMinusQuantity = () => {
@@ -67,8 +66,8 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 		dispatch(showNotification());
 		// hide notification
 		setTimeout(() => {
-      dispatch(hideNotification());
-    }, 1500);
+			dispatch(hideNotification());
+		}, 2000);
 	};
 
 	return <section
@@ -114,7 +113,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 				{/* Info */}
 				<div className='flex flex-col justify-center'>
 					<div className='uppercase space-y-3 mb-4'>
-						<p className='text-sm font-semibold tracking-wider text-gray-600 mt-6 sm:mt-0'>
+						<p className='text-base font-semibold tracking-wider text-gray-600 mt-6 sm:mt-0'>
 							{brand}
 						</p>
 						<h1 className='text-3xl md:text-4xl font-bold tracking-wide text-gray-900'>
@@ -125,7 +124,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 						</p>
 					</div>
 					<div className='text-3xl font-bold text-gray-900 mb-6'>
-						{formatPrice(price)}
+						{price.toLocaleString('cs-CZ')} Kč
 					</div>
 					<p className='text-sm leading-relaxed text-gray-700 normal-case mb-6'>
 						{info}

@@ -10,7 +10,11 @@ const loadFromLocalStorage = (): ShoppingBagState => {
 			return JSON.parse(savedBag);
 		}
 	}
-	return { items: [], notification: false };
+	return {
+		items: [],
+		addToBagNotification: false,
+		deleteFromBagNotification: false
+	};
 };
 
 // initial state of the shopping bag
@@ -66,10 +70,16 @@ const shoppingBagSlice = createSlice({
 			}
 		},
 		showNotification(state) {
-			state.notification = true; // show notification
+			state.addToBagNotification = true;
 		},
 		hideNotification(state) {
-			state.notification = false; // hide notification
+			state.addToBagNotification = false;
+		},
+		showDeleteNotification(state) {
+			state.deleteFromBagNotification = true;
+		},
+		hideDeleteNotification(state) {
+			state.deleteFromBagNotification = false;
 		}
 	}
 });
@@ -80,7 +90,9 @@ export const {
 	changeQuantity,
 	deleteProduct,
 	showNotification,
-	hideNotification
+	hideNotification,
+	showDeleteNotification,
+	hideDeleteNotification
 } = shoppingBagSlice.actions;
 
 export default shoppingBagSlice.reducer;

@@ -34,7 +34,8 @@ export interface ShoppingBagItem {
 
 export interface ShoppingBagState {
 	items: ShoppingBagItem[];
-	notification: boolean;
+	addToBagNotification: boolean;
+	deleteFromBagNotification: boolean;
 }
 
 export interface ProductDetails {

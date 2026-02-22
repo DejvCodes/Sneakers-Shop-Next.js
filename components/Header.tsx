@@ -11,7 +11,7 @@ const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
 	const [totalQuantity, setTotalQuantity] = useState(0);
 	const shoppingBag = useSelector((store: any) => store.shoppingBag.items);
-	const notification = useSelector((store: any) => store.shoppingBag.notification);
+	const addToBagNotification = useSelector((store: any) => store.shoppingBag.addToBagNotification);
 	const currentSection = usePathname().replace('/', '');
 
 	useEffect(() => {
@@ -22,14 +22,12 @@ const Header = () => {
 
 	return <header className='fixed left-0 top-0 w-full h-15 flex items-center bg-white shadow-[0_0_10px_rgba(0,0,0,0.35)] z-1000'>
 		{/* Notification */}
-		{notification &&
-			<div className='fixed top-20 right-6 flex items-center bg-white text-gray-800 border border-gray-200 rounded-md shadow-lg animate-[slideInRight_0.3s_ease-out,slideOutRight_0.3s_ease-in_2.7s] px-5 py-3.5 gap-2.5 z-1100'>
-				<div className='w-2 h-2 bg-turquoise rounded-full' />
-				<span className='text-sm font-medium'>
-					Přidáno do košíku
-				</span>
-			</div>
-		}
+		<div className={`fixed top-20 right-6 flex items-center bg-white text-gray-800 border border-gray-200 rounded-md shadow-lg px-5 py-3.5 gap-2.5 z-1100 transition-all duration-300 ${addToBagNotification ? 'animate-[slideInRight_0.3s_ease-out]' : 'opacity-0 translate-x-full pointer-events-none'}`}>
+			<div className='w-2 h-2 bg-turquoise rounded-full' />
+			<span className='text-sm font-medium'>
+				Přidáno do košíku
+			</span>
+		</div>
 
 		<div className='mx-auto flex h-full w-full max-w-7xl items-center justify-between px-4'>
 			{/* Logo */}
