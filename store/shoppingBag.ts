@@ -1,5 +1,5 @@
-import {ShoppingBagState} from '@/types';
 import {createSlice} from '@reduxjs/toolkit';
+import {ShoppingBagState} from '@/types/type';
 
 // load shopping bag from localStorage
 const loadFromLocalStorage = (): ShoppingBagState => {

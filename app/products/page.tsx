@@ -1,21 +1,17 @@
 'use client';
+import {useState} from 'react';
 import {Sneaker} from '@/types/type';
-import {useEffect, useState} from 'react';
 import {sneakers} from '@/constants/sneakers';
 import ProductCard from '@/components/ProductCard';
 import {ICONS, PRODUCTS_PAGE_CONTENT} from '@/constants/content';
 
 const Products = () => {
 	const [searchingProduct, setSearchingProduct] = useState('');
-	const [filteredProducts, setFilteredProducts] = useState<Sneaker[]>(sneakers);
 
-	// filter of products
-	useEffect(() => {
-		const productsAfterFilter = sneakers.filter((oneSneaker) => {
-			return oneSneaker.fullName.toLowerCase().includes(searchingProduct.toLowerCase());
-		});
-		setFilteredProducts(productsAfterFilter);
-	}, [searchingProduct]);
+	// filter products based on searching product
+	const filteredProducts: Sneaker[] = sneakers.filter((oneSneaker) => {
+		return oneSneaker.fullName.toLowerCase().includes(searchingProduct.toLowerCase());
+	});
 
 	return <section
 		className='w-full max-w-7xl flex items-center justify-center my-20 mx-auto px-4'

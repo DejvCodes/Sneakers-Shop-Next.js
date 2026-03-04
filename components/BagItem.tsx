@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import {BagItemProps} from '@/types/type';
 import {BAG_ITEM_CONTENT, ICONS} from '@/constants/content';
 
@@ -15,7 +14,7 @@ const BagItem = ({ item, sneaker, onDecrease, onIncrease, onDelete }: BagItemPro
 					href={`/product/${sneaker.slug}`}
 					className='w-full h-full block'
 				>
-					<Image
+					<img
 						src={sneaker.image}
 						alt={sneaker.fullName}
 						width={128}

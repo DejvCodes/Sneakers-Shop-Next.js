@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
-import {useEffect, useState} from 'react';
+import {RootState} from '@/store';
+import {useSyncExternalStore} from 'react';
 import BagItem from '@/components/BagItem';
 import {ShoppingBagItem} from '@/types/type';
 import {sneakers} from '@/constants/sneakers';
@@ -10,10 +11,9 @@ import {changeQuantity, deleteProduct, showDeleteNotification, hideDeleteNotific
 
 const ShoppingBag = () => {
 	const dispatch = useDispatch();
-	const [price, setPrice] = useState<number>(0);
-	const [mounted, setMounted] = useState(false);
-	const shoppingBag = useSelector((store: any) => store.shoppingBag.items);
-	const deleteFromBagNotification = useSelector((store: any) => store.shoppingBag.deleteFromBagNotification);
+	const shoppingBag = useSelector((store: RootState) => store.shoppingBag.items);
+	const deleteFromBagNotification = useSelector((store: RootState) => store.shoppingBag.deleteFromBagNotification);
+	const isHydrated = useSyncExternalStore(() => () => {}, () => true, () => false);
 
 	const handleDelete = (productId: string) => {
 		dispatch(deleteProduct({ productId }));
@@ -23,22 +23,15 @@ const ShoppingBag = () => {
 		}, 3000);
 	};
 
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	useEffect(() => {
-		const totalPrice = shoppingBag.reduce((acc: number, item: ShoppingBagItem) => {
-			const sneaker = sneakers.find((oneSneaker) => {
-				return oneSneaker.id === Number(item.productId);
-			});
-			if (sneaker) {
-				return acc + sneaker.price * item.quantity;
-			}
-			return acc;
-		}, 0);
-		setPrice(totalPrice);
-	}, [shoppingBag]);
+	const price = shoppingBag.reduce((acc: number, item: ShoppingBagItem) => {
+		const sneaker = sneakers.find((oneSneaker) => {
+			return oneSneaker.id === Number(item.productId);
+		});
+		if (sneaker) {
+			return acc + sneaker.price * item.quantity;
+		}
+		return acc;
+	}, 0);
 
 	return <div className='min-h-screen pt-20 lg:px-20 pb-10'>
 		{/* Delete Notification */}
@@ -69,7 +62,7 @@ const ShoppingBag = () => {
 				</h1>
 			</div>
 
-			{!mounted ? (
+			{!isHydrated ? (
 				<div className='text-center py-12 md:py-20'>
 					<p className='text-gray-600 text-base md:text-lg'>
 						{SHOPPING_BAG_CONTENT.loading}

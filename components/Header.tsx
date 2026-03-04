@@ -1,23 +1,20 @@
 'use client';
 import Link from 'next/link';
-import {ShoppingBagItem} from '@/types/type';
+import {RootState} from '@/store';
 import {useSelector} from 'react-redux';
-import {useState, useEffect} from 'react';
 import {usePathname} from 'next/navigation';
+import {useState, useSyncExternalStore} from 'react';
 import {HEADER_CONTENT, ICONS, NAV_LINKS} from '@/constants/content';
 
 const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
-	const [totalQuantity, setTotalQuantity] = useState(0);
-	const shoppingBag = useSelector((store: any) => store.shoppingBag.items);
-	const addToBagNotification = useSelector((store: any) => store.shoppingBag.addToBagNotification);
+	const shoppingBag = useSelector((store: RootState) => store.shoppingBag.items);
+	const addToBagNotification = useSelector((store: RootState) => store.shoppingBag.addToBagNotification);
+	const isHydrated = useSyncExternalStore(() => () => {}, () => true, () => false);
 	const currentSection = usePathname().replace('/', '');
 
-	useEffect(() => {
-		// count total quantity of items in the shopping bag
-		const quantity = shoppingBag.reduce((acc: number, item: ShoppingBagItem) => acc + item.quantity, 0);
-		setTotalQuantity(quantity);
-	}, [shoppingBag]);
+	// calculate total quantity of products in the shopping bag
+	const totalQuantity = isHydrated ? shoppingBag.reduce((acc, item) => acc + item.quantity, 0) : 0;
 
 	return <header
 		className='w-full h-15 flex items-center bg-white fixed left-0 top-0 shadow-[0_0_10px_rgba(0,0,0,0.35)] z-1000'

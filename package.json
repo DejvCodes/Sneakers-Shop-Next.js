@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "cp .htaccess out/.htaccess",
+    "postbuild": "sh -c 'if [ -f .htaccess ]; then cp .htaccess out/.htaccess; else echo \".htaccess not found, skipping copy\"; fi'",
     "start": "next start",
     "lint": "eslint"
   },

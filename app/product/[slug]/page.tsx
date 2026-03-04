@@ -11,7 +11,6 @@ const ProductDetails = ({ params }: ProductPageProps) => {
 	const dispatch = useDispatch();
 	const [slug, setSlug] = useState<string>('');
 	const [quantity, setQuantity] = useState<number>(1);
-	const [productDetails, setProductDetails] = useState<Sneaker | null>(null);
 
 	useEffect(() => {
 		// get slug from params
@@ -22,16 +21,10 @@ const ProductDetails = ({ params }: ProductPageProps) => {
 		getParams();
 	}, [params]);
 
-	useEffect(() => {
-		if (!slug) return;
-		// find product by slug
-		const findProductDetails: Sneaker | undefined = sneakers.find((oneProduct) => {
-			return oneProduct.slug === slug;
-		})
-		if (findProductDetails) {
-			setProductDetails(findProductDetails);
-		}
-	}, [slug]);
+	// find product details based on slug
+	const productDetails: Sneaker | null = slug
+		? sneakers.find((oneProduct) => oneProduct.slug === slug) ?? null
+		: null;
 
 	// loading state
 	if (!productDetails) {
