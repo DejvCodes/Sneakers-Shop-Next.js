@@ -18,7 +18,7 @@ It showcases a sneaker catalog, product detail pages, membership benefits, and a
 ## 🏃🏻 How to Run this App
 
 1. Clone repository:
-  • `git clone https://github.com/DejvCodes/Sneakers-Shop-Next.js.git`
+  • `git clone https://github.com/DejvCodes/Sneakers-Shop-Next.js.git` <br>
   • `cd Sneakers-Shop-Next.js`
 2. Install dependencies:
   • `npm install`
