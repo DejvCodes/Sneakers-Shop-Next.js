@@ -10,11 +10,14 @@ const Footer = () => {
 			<div className='flex items-center gap-4'>
 				<Link
 					href='/products'
-					className='hover:text-black transition'>{FOOTER_CONTENT.productsLink}
+					className='hover:text-black transition'
+				>
+						{FOOTER_CONTENT.productsLink}
 				</Link>
 				<Link
 					href='/membership'
-					className='hover:text-black transition'>{FOOTER_CONTENT.membershipLink}
+					className='hover:text-black transition'>
+						{FOOTER_CONTENT.membershipLink}
 				</Link>
 			</div>
 		</div>
