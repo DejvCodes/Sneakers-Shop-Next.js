@@ -1,11 +1,10 @@
 'use client';
 import Link from 'next/link';
-import {ShoppingBagItem} from '@/types';
+import {ShoppingBagItem} from '@/types/type';
 import {useSelector} from 'react-redux';
 import {useState, useEffect} from 'react';
 import {usePathname} from 'next/navigation';
-import {LuShoppingBag} from 'react-icons/lu';
-import {NAV_LINKS} from '@/constants/content';
+import {HEADER_CONTENT, ICONS, NAV_LINKS} from '@/constants/content';
 
 const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
@@ -21,26 +20,26 @@ const Header = () => {
 	}, [shoppingBag]);
 
 	return <header
-		className='fixed left-0 top-0 w-full h-15 flex items-center bg-white shadow-[0_0_10px_rgba(0,0,0,0.35)] z-1000'
+		className='w-full h-15 flex items-center bg-white fixed left-0 top-0 shadow-[0_0_10px_rgba(0,0,0,0.35)] z-1000'
 	>
 		{/* Notification */}
-		<div className={`fixed top-20 right-6 flex items-center bg-white text-gray-800 border border-gray-200 rounded-md shadow-lg px-5 py-3.5 gap-2.5 z-1100 transition-all duration-300 ${addToBagNotification ? 'animate-[slideInRight_0.3s_ease-out]' : 'opacity-0 translate-x-full pointer-events-none'}`}>
+		<div className={`flex items-center bg-white text-gray-800 border border-gray-200 px-5 py-3.5 gap-2.5 fixed top-20 right-6 rounded-md shadow-lg transition-all duration-300 z-1100 ${addToBagNotification ? 'animate-[slideInRight_0.3s_ease-out]' : 'opacity-0 translate-x-full pointer-events-none'}`}>
 			<div className='w-2 h-2 bg-turquoise rounded-full' />
 			<span className='text-sm font-medium'>
-				Přidáno do košíku
+				{HEADER_CONTENT.addToBagNotification}
 			</span>
 		</div>
 
-		<div className='mx-auto flex h-full w-full max-w-7xl items-center justify-between px-4'>
+		<div className='h-full w-full max-w-7xl flex items-center justify-between mx-auto px-4'>
 			{/* Logo */}
 			<div className='mb-1.25'>
 				<Link
 					href='/'
 					onClick={() => setOpenMenu(false)}
-					className='text-[20px] font-semibold uppercase'
+					className='text-black text-[20px] font-semibold uppercase'
 				>
-					sneakers
-					<span className='font-serif text-[30px] text-turquoise'>.</span>
+					{HEADER_CONTENT.logo}
+					<span className='text-turquoise font-serif text-[30px]'>{HEADER_CONTENT.logoDot}</span>
 				</Link>
 			</div>
 
@@ -51,12 +50,12 @@ const Header = () => {
 						return <li key={index}>
 							<Link
 								href={oneLink.path}
-								className={`relative group text-[12px] font-medium text-black uppercase tracking-[1px] transition hover:text-foreground px-1.25
+								className={`text-black hover:text-foreground text-[12px] font-medium uppercase tracking-[1px] px-1.25 relative group transition
 									${currentSection === oneLink.path.replace('/', '') ? 'text-black' : 'text-gray-600'}
 								`}
 							>
 								{oneLink.text}
-								<span className={`absolute -bottom-1.25 left-1/2 w-0 h-[1.5px] -translate-x-1/2 bg-black transition-all duration-200 group-hover:w-full
+								<span className={`w-0 h-[1.5px] bg-black absolute -bottom-1.25 left-1/2 -translate-x-1/2 transition-all duration-200 group-hover:w-full
 									${currentSection === oneLink.path.replace('/', '') ? 'w-[90%]' : ''}
 								`}/>
 							</Link>
@@ -67,7 +66,7 @@ const Header = () => {
 
 			{/* Mobile Nav */}
 			<nav
-				className={`fixed right-0 top-0 w-[70%] min-h-screen flex items-center justify-center bg-white shadow-[0_0_10px_rgba(0,0,0,0.35)] transition-transform duration-300 pb-20 z-1000
+				className={`w-[70%] min-h-screen flex items-center justify-center bg-white pb-20 fixed right-0 top-0 shadow-[0_0_10px_rgba(0,0,0,0.35)] transition-transform duration-300 z-1000
 					${openMenu ? 'translate-x-0' : 'translate-x-full'}
 				`}
 			>
@@ -77,13 +76,13 @@ const Header = () => {
 							<Link
 								href={oneLink.path}
 								onClick={() => setOpenMenu(false)}
-								className={`relative group text-[12.5px] font-medium text-black uppercase tracking-[1px] transition hover:text-foreground px-1.25
+								className={`text-black hover:text-foreground text-[12.5px] font-medium uppercase tracking-[1px] px-1.25 relative group transition
 									${currentSection === oneLink.path.replace('/', '') ? 'text-black' : 'text-gray-500'}
 								`}
 							>
 								{oneLink.text}
 								<span
-									className={`absolute -bottom-1.25 left-1/2 w-0 h-[1.5px] -translate-x-1/2 bg-black transition-all duration-200 group-hover:w-full
+									className={`w-0 h-[1.5px] bg-black absolute -bottom-1.25 left-1/2 -translate-x-1/2 transition-all duration-200 group-hover:w-full
 										${currentSection === oneLink.path.replace('/', '') ? 'w-[90%]' : ''}
 									`}
 								/>
@@ -98,10 +97,10 @@ const Header = () => {
 				{/* Bag */}
 				<Link
 					href='/shopping-bag'
-					className='relative inline-flex items-center'
+					className='inline-flex items-center relative'
 				>
-					<LuShoppingBag className='text-[22px] text-black transition hover:text-foreground' />
-					<span className='absolute -right-2 -top-2 w-4.25 h-4.25 flex justify-center items-center text-black text-[11px] bg-turquoise rounded-full'>
+					<ICONS.bag className='text-black hover:text-foreground text-[22px] transition' />
+					<span className='w-4.25 h-4.25 flex justify-center items-center text-black bg-turquoise text-[11px] absolute -right-2 -top-2 rounded-full'>
 						{totalQuantity}
 					</span>
 				</Link>
@@ -110,11 +109,11 @@ const Header = () => {
 				<button
 					type='button'
 					onClick={() => setOpenMenu((e) => !e)}
-					className='relative w-10 h-10 inline-flex items-center justify-center md:hidden z-1100'
-					aria-label='Otevřít menu'
+					className='w-10 h-10 inline-flex items-center justify-center relative md:hidden z-1100'
+					aria-label={HEADER_CONTENT.openMenuAria}
 					aria-expanded={openMenu}
 				>
-					<div className='flex flex-col gap-[4.5px] -mr-4'>
+					<div className='flex flex-col -mr-4 gap-[4.5px]'>
 						<span
 							className={`w-5.5 h-[2.5px] bg-zinc-800 transition-transform duration-300
 								${openMenu ? 'translate-y-1.75 -rotate-45' : ''}

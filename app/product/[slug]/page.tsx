@@ -1,14 +1,13 @@
 'use client';
 import Link from 'next/link';
-import {Sneaker} from '@/types';
 import {useDispatch} from 'react-redux';
 import {useState, useEffect} from 'react';
 import {sneakers} from '@/constants/sneakers';
-import {FaArrowLeftLong} from 'react-icons/fa6';
-import {CiSquareMinus, CiSquarePlus} from 'react-icons/ci';
+import {ProductPageProps, Sneaker} from '@/types/type';
+import {ICONS, PRODUCT_DETAILS_CONTENT} from '@/constants/content';
 import {addToShoppingBag, hideNotification, showNotification} from '@/store/shoppingBag';
 
-const ProductDetails = ({ params }: { params: { slug: string } }) => {
+const ProductDetails = ({ params }: ProductPageProps) => {
 	const dispatch = useDispatch();
 	const [slug, setSlug] = useState<string>('');
 	const [quantity, setQuantity] = useState<number>(1);
@@ -38,7 +37,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 	if (!productDetails) {
 		return <div className='min-h-screen flex items-center justify-center'>
 			<div className='text-xl font-medium animate-pulse'>
-				Načítání...
+				{PRODUCT_DETAILS_CONTENT.loading}
 			</div>
 		</div>
 	}
@@ -74,22 +73,22 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 
 	return <section
 		id={`product-${id}-${name}`}
-		className='w-full min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-white py-14'
+		className='w-full min-h-screen flex items-center justify-center bg-linear-to-br py-14 from-gray-50 to-white'
 	>
-		<div className='relative w-full max-w-7xl h-full pt-4 px-4'>
+		<div className='w-full max-w-7xl h-full pt-4 px-4 relative'>
 			{/* Back Link */}
 			<Link
 				href='/'
-				className='inline-flex items-center text-sm font-medium uppercase group gap-2 mb-4'
+				className='inline-flex items-center text-sm font-medium uppercase mb-4 gap-2 group'
 			>
-				<FaArrowLeftLong className='transition-transform duration-200 group-hover:-translate-x-1 mb-0.5' />
-				Zpět na produkty
+				<ICONS.back className='mb-0.5 transition-transform duration-200 group-hover:-translate-x-1' />
+				{PRODUCT_DETAILS_CONTENT.backToProducts}
 			</Link>
 
 			{/* Images and Info */}
-			<div className='w-full grid grid-cols-1 lg:grid-cols-2 bg-white border border-gray-200 rounded-xl shadow-xl lg:gap-16 p-6 lg:p-10'>
+			<div className='w-full grid grid-cols-1 lg:grid-cols-2 bg-white border border-gray-200 p-6 lg:p-10 lg:gap-16 rounded-xl shadow-xl'>
 				<div className='w-full space-y-4'>
-					<div className='relative w-full aspect-3/2 bg-gray-100 rounded-lg overflow-hidden shadow-md'>
+					<div className='w-full aspect-3/2 bg-gray-100 relative rounded-lg overflow-hidden shadow-md'>
 						<img
 							src={image}
 							alt={slug}
@@ -100,7 +99,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 						{images.map((oneImage, index) => (
 							<div
 								key={index}
-								className='relative w-full aspect-3/2 bg-gray-100 rounded-lg overflow-hidden shadow-md'
+								className='w-full aspect-3/2 bg-gray-100 relative rounded-lg overflow-hidden shadow-md'
 							>
 								<img
 									src={oneImage}
@@ -115,61 +114,61 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 				{/* Info */}
 				<div className='flex flex-col justify-center'>
 					<div className='uppercase space-y-3 mb-4'>
-						<p className='text-base font-semibold tracking-wider text-gray-600 mt-6 sm:mt-0'>
+						<p className='text-gray-600 text-base font-semibold tracking-wider mt-6 sm:mt-0'>
 							{brand}
 						</p>
-						<h1 className='text-3xl md:text-4xl font-bold tracking-wide text-gray-900'>
+						<h1 className='text-gray-900 text-3xl md:text-4xl font-bold tracking-wide'>
 							{name}
 						</h1>
-						<p className='text-base text-gray-500'>
+						<p className='text-gray-500 text-base'>
 							{type}
 						</p>
 					</div>
-					<div className='text-3xl font-bold text-gray-900 mb-6'>
-						{price.toLocaleString('cs-CZ')} Kč
+					<div className='text-gray-900 text-3xl font-bold mb-6'>
+						{price.toLocaleString('cs-CZ')} {PRODUCT_DETAILS_CONTENT.currencySuffix}
 					</div>
-					<p className='text-sm leading-relaxed text-gray-700 normal-case mb-6'>
+					<p className='text-gray-700 text-sm leading-relaxed normal-case mb-6'>
 						{info}
 					</p>
-					<div className='text-sm text-gray-600 space-y-2 sm:space-y-4 mb-4 sm:mb-8'>
+					<div className='text-gray-600 text-sm space-y-2 sm:space-y-4 mb-4 sm:mb-8'>
 						<div className='flex items-center gap-2'>
-							<span className='font-semibold uppercase'>Sezóna:</span>
-							<span className='capitalize'>{season?.length ? season.join(', ') : 'Neznámá informace'}</span>
+							<span className='font-semibold uppercase'>{PRODUCT_DETAILS_CONTENT.seasonLabel}</span>
+							<span className='capitalize'>{season?.length ? season.join(', ') : PRODUCT_DETAILS_CONTENT.seasonUnknown}</span>
 						</div>
 						<div className='flex items-center gap-2'>
-							<span className='font-semibold uppercase'>Kód produktu:</span>
+							<span className='font-semibold uppercase'>{PRODUCT_DETAILS_CONTENT.productCodeLabel}</span>
 							<span>{productCode}</span>
 						</div>
 					</div>
 
 					{/* Add to Bag */}
 					<div className='sm:mt-8'>
-						<div className='flex items-stretch sm:items-center rounded-lg gap-2 sm:gap-4'>
+						<div className='flex items-stretch sm:items-center gap-2 sm:gap-4 rounded-lg'>
 							<div className='flex items-center justify-center border-2 border-gray-300 rounded-lg overflow-hidden'>
 								<button
 									type='button'
-									className='hover:bg-gray-200 transition-colors px-2 py-3 cursor-pointer'
+									className='hover:bg-gray-200 px-2 py-3 transition-colors cursor-pointer'
 									onClick={handleMinusQuantity}
 								>
-									<CiSquareMinus className='text-xl sm:text-2xl' />
+									<ICONS.minus className='text-xl sm:text-2xl' />
 								</button>
-								<span className='min-w-7 sm:min-w-10 text-center bg-white text-lg font-semibold'>
+								<span className='min-w-7 sm:min-w-10 bg-white text-center text-lg font-semibold'>
 									{quantity}
 								</span>
 								<button
 									type='button'
-									className='hover:bg-gray-200 transition-colors px-2 py-3 cursor-pointer'
+									className='hover:bg-gray-200 px-2 py-3 transition-colors cursor-pointer'
 									onClick={handlePlusQuantity}
 								>
-									<CiSquarePlus className='text-xl sm:text-2xl' />
+									<ICONS.plus className='text-xl sm:text-2xl' />
 								</button>
 							</div>
 							<button
 								type='button'
-								className='flex items-center justify-center bg-black text-white text-center text-xs sm:text-sm font-semibold uppercase rounded-lg hover:scale-102 transition-all duration-200 shadow-lg py-4 px-6 sm:px-8 cursor-pointer'
+								className='flex items-center justify-center bg-black text-white text-center text-xs sm:text-sm font-semibold uppercase py-4 px-6 sm:px-8 rounded-lg hover:scale-102 transition-all duration-200 shadow-lg cursor-pointer'
 								onClick={handleAddToBag}
 							>
-								Přidat do košíku
+								{PRODUCT_DETAILS_CONTENT.addToBag}
 							</button>
 						</div>
 					</div>

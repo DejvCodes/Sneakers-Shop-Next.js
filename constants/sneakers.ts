@@ -1,4 +1,4 @@
-import {Sneaker} from '@/types';
+import {Sneaker} from '@/types/type';
 
 export const sneakers: Sneaker[] = [
 	{

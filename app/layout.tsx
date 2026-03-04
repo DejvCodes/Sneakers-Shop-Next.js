@@ -3,6 +3,8 @@ import type {Metadata} from 'next';
 import Providers from './providers';
 import Header from '@/components/Header';
 import {Public_Sans} from 'next/font/google';
+import {RootLayoutProps} from '@/types/type';
+import {APP_META_CONTENT} from '@/constants/content';
 
 const publicSans = Public_Sans({
 	subsets: ['latin'],
@@ -11,14 +13,17 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-	title: 'Sneakers Shop',
-	description: 'Your one-stop shop for the latest and greatest sneakers.',
+	title: APP_META_CONTENT.title,
+	description: APP_META_CONTENT.description,
 	icons: '/favicon.png',
 };
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-	return <html lang='cz'>
-		<body className={`${publicSans.className} antialiased bg-black`}>
+const RootLayout = ({children}: RootLayoutProps) => {
+	return <html
+		lang={APP_META_CONTENT.lang}
+		data-scroll-behavior='smooth'
+	>
+		<body className={`${publicSans.className} bg-black antialiased`}>
 			<Providers>
 				<Header />
 				{children}
