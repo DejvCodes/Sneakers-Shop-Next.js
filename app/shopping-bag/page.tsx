@@ -16,13 +16,17 @@ const ShoppingBag = () => {
 	const isHydrated = useSyncExternalStore(() => () => {}, () => true, () => false);
 
 	const handleDelete = (productId: string) => {
+		// dispatch delete product action
 		dispatch(deleteProduct({ productId }));
+		// dispatch show delete notification action
 		dispatch(showDeleteNotification());
+		// hide notification after 3 seconds
 		setTimeout(() => {
 			dispatch(hideDeleteNotification());
 		}, 3000);
 	};
 
+	// calculate total price
 	const price = shoppingBag.reduce((acc: number, item: ShoppingBagItem) => {
 		const sneaker = sneakers.find((oneSneaker) => {
 			return oneSneaker.id === Number(item.productId);
