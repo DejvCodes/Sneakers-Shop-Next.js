@@ -1,7 +1,7 @@
 # 👟 Sneakers Shop
 
-Sneakers Shop is a modern e-commerce web app built with **Next.js**, **TypeScript**, and **Tailwind CSS**.  
-It showcases a sneaker catalog, product detail pages, membership benefits, and a working shopping bag with persisted client state.
+Sneakers Shop is a modern e-commerce web app built with **Next.js**, **TypeScript** and **Tailwind CSS**.  
+It showcases a sneaker catalog, product detail pages, membership benefits and a working shopping bag with persisted client state.
 
 ## 🚀 Features
 
