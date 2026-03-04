@@ -2,6 +2,7 @@ import './globals.css';
 import type {Metadata} from 'next';
 import Providers from './providers';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import {Public_Sans} from 'next/font/google';
 import {RootLayoutProps} from '@/types/type';
 import {APP_META_CONTENT} from '@/constants/content';
@@ -27,6 +28,7 @@ const RootLayout = ({children}: RootLayoutProps) => {
 			<Providers>
 				<Header />
 				{children}
+				<Footer />
 			</Providers>
 		</body>
 	</html>

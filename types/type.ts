@@ -152,6 +152,24 @@ export interface ShoppingBagContent {
 	currencySuffix: string;
 }
 
+export interface FooterContent {
+	copyrightLabel: string;
+	productsLink: string;
+	membershipLink: string;
+}
+
+export interface LoadingContent {
+	label: string;
+}
+
+export interface NotFoundContent {
+	code: string;
+	title: string;
+	description: string;
+	backHome: string;
+	toProducts: string;
+}
+
 export interface HomeContent {
 	featureCards: HomeFeatureCard[];
 	stats: HomeStat[];

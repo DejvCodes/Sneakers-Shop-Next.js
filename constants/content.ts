@@ -22,10 +22,13 @@ import type {
 	MemberContent,
 	MembershipPageContent,
 	NavLink,
+	NotFoundContent,
+	LoadingContent,
 	ProductCardContent,
 	ProductDetailsContent,
 	ProductsPageContent,
 	ShoppingBagContent,
+	FooterContent,
 } from '@/types/type';
 
 export const NAV_LINKS: NavLink[] = [
@@ -106,6 +109,24 @@ export const SHOPPING_BAG_CONTENT: ShoppingBagContent = {
 	empty: 'Váš košík je prázdný',
 	totalPrice: 'Celková cena:',
 	currencySuffix: 'Kč',
+};
+
+export const FOOTER_CONTENT: FooterContent = {
+	copyrightLabel: 'Sneakers Shop',
+	productsLink: 'Produkty',
+	membershipLink: 'Členství',
+};
+
+export const LOADING_CONTENT: LoadingContent = {
+	label: 'Načítání...',
+};
+
+export const NOT_FOUND_CONTENT: NotFoundContent = {
+	code: 'Chyba 404',
+	title: 'Stránka nenalezena',
+	description: 'Tahle stránka neexistuje nebo byla přesunuta.',
+	backHome: 'Zpět domů',
+	toProducts: 'Přejít na produkty',
 };
 
 export const HOME_CONTENT: HomeContent = {
