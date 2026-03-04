@@ -5,25 +5,25 @@ It showcases a sneaker catalog, product detail pages, membership benefits, and a
 
 ## 🚀 Features
 
-- **Hero homepage** - clean landing section with CTA buttons for products and membership.
-- **Product catalog** - product search by name.
-- **Product detail** - image gallery, pricing, season info, and product code.
-- **Shopping bag** - add/remove items, update quantity, and total price calculation.
-- **Persistent cart state** - shopping bag is saved in `localStorage`.
-- **Membership page** - Sneakers Club and VIP benefits overview.
-- **Responsive UI** - optimized for desktop and mobile (including mobile menu).
-- **Notifications** - feedback when products are added/removed from the bag.
-- **Custom 404 + loading states** - built-in not-found and loading pages.
+• **Hero homepage** – clean landing section with CTA buttons for products and membership. <br>
+• **Product catalog** – product search by name. <br>
+• **Product detail** – image gallery, pricing, season info, and product code. <br>
+• **Shopping bag** – add/remove items, update quantity, and total price calculation. <br>
+• **Persistent cart state** – shopping bag is saved in `localStorage`. <br>
+• **Membership page** – Sneakers Club and VIP benefits overview. <br>
+• **Responsive UI** – optimized for desktop and mobile (including mobile menu). <br>
+• **Notifications** – feedback when products are added/removed from the bag. <br>
+• **Custom 404 + loading states** – built-in not-found and loading pages. <br>
 
 ## 🏃🏻 How to Run this App
 
 1. Clone repository: <br>
   • `git clone https://github.com/DejvCodes/Sneakers-Shop-Next.js.git` <br>
-  • `cd Sneakers-Shop-Next.js`
-2. Install dependencies:
-  • `npm install`
-3. Start development server:
-  • `npm run dev`
+  • `cd Sneakers-Shop-Next.js` <br>
+2. Install dependencies: <br>
+  • `npm install` <br>
+3. Start development server: <br>
+  • `npm run dev` <br>
 
 ## 💻 Tech stack
 
