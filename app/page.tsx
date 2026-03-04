@@ -98,7 +98,7 @@ const HomePage = () => {
 								key={card.title}
 								className='bg-white border border-black/10 p-5 rounded-xl transition hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]'
 							>
-								<div className='inline-flex bg-turquoise/20 mb-3 p-2 rounded-full'>
+								<div className='inline-flex bg-turquoise/70 mb-3 p-2 rounded-full'>
 									<Icon className='text-xl' />
 								</div>
 								<h3 className='text-sm font-semibold uppercase mb-2'>{card.title}</h3>
