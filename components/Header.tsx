@@ -20,7 +20,9 @@ const Header = () => {
 		setTotalQuantity(quantity);
 	}, [shoppingBag]);
 
-	return <header className='fixed left-0 top-0 w-full h-15 flex items-center bg-white shadow-[0_0_10px_rgba(0,0,0,0.35)] z-1000'>
+	return <header
+		className='fixed left-0 top-0 w-full h-15 flex items-center bg-white shadow-[0_0_10px_rgba(0,0,0,0.35)] z-1000'
+	>
 		{/* Notification */}
 		<div className={`fixed top-20 right-6 flex items-center bg-white text-gray-800 border border-gray-200 rounded-md shadow-lg px-5 py-3.5 gap-2.5 z-1100 transition-all duration-300 ${addToBagNotification ? 'animate-[slideInRight_0.3s_ease-out]' : 'opacity-0 translate-x-full pointer-events-none'}`}>
 			<div className='w-2 h-2 bg-turquoise rounded-full' />
@@ -50,7 +52,7 @@ const Header = () => {
 							<Link
 								href={oneLink.path}
 								className={`relative group text-[12px] font-medium text-black uppercase tracking-[1px] transition hover:text-foreground px-1.25
-									${currentSection === oneLink.path.replace('/', '') ? 'text-black' : 'text-gray-500'}
+									${currentSection === oneLink.path.replace('/', '') ? 'text-black' : 'text-gray-600'}
 								`}
 							>
 								{oneLink.text}

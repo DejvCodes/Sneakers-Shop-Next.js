@@ -1,9 +1,12 @@
 'use client';
+import Link from 'next/link';
 import {ShoppingBagItem} from '@/types';
 import {useEffect, useState} from 'react';
 import {sneakers} from '@/constants/sneakers';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeQuantity, deleteProduct, showDeleteNotification, hideDeleteNotification} from '@/store/shoppingBag';
+import { CiSquareMinus } from 'react-icons/ci';
 
 const ShoppingBag = () => {
 	const dispatch = useDispatch();
@@ -39,9 +42,11 @@ const ShoppingBag = () => {
 
 	return <div className='min-h-screen pt-20 lg:px-20 pb-10'>
 		{/* Delete Notification */}
-		<div className={`fixed top-20 right-6 flex items-center bg-white text-gray-800 border border-gray-200 rounded-md shadow-lg px-5 py-3.5 gap-2.5 z-1100 transition-all duration-300 ${deleteFromBagNotification
+		<div className={`fixed top-20 right-6 flex items-center bg-white text-gray-800 border border-gray-200 rounded-md shadow-lg px-5 py-3.5 gap-2.5 z-1100 transition-all duration-300
+			${deleteFromBagNotification
 			? 'animate-[slideInRight_0.3s_ease-out]'
-			: 'opacity-0 translate-x-full pointer-events-none'}`
+			: 'opacity-0 translate-x-full pointer-events-none'
+			}`
 		}>
 			<div className='w-2 h-2 bg-red-500 rounded-full' />
 			<span className='text-sm font-medium'>
@@ -50,9 +55,19 @@ const ShoppingBag = () => {
 		</div>
 
 		<div className='max-w-7xl mx-auto px-4'>
-			<h1 className='text-2xl md:text-3xl font-bold uppercase mb-6 md:mb-8'>
-				Nákupní košík
-			</h1>
+			<div className='flex items-center justify-between mb-5'>
+				<Link
+					href='/'
+					className='inline-flex items-center text-sm font-medium uppercase group gap-2'
+				>
+					<FaArrowLeftLong className='transition-transform duration-200 group-hover:-translate-x-1 mb-0.5' />
+					Zpět
+				</Link>
+
+				<h1 className='text-sm font-bold uppercase'>
+					Nákupní košík
+				</h1>
+			</div>
 
 			{!mounted ? (
 				<div className='text-center py-12 md:py-20'>
@@ -69,13 +84,16 @@ const ShoppingBag = () => {
 			) : (
 				<div className='space-y-4'>
 					{shoppingBag.map((item: ShoppingBagItem, index: number) => {
-						const sneaker = sneakers.find((s) => s.id === Number(item.productId));
+						const sneaker = sneakers.find((oneSneaker) => oneSneaker.id === Number(item.productId));
 						if (!sneaker) return null;
 
 						return (
-							<div key={index} className='border border-gray-200 rounded-lg p-4 md:p-6 flex gap-4 md:gap-6'>
+							<div
+								key={index}
+								className='h-27 border border-gray-200 rounded-lg p-4 flex gap-4'
+							>
 								{/* Image */}
-								<div className='w-24 h-24 md:w-32 md:h-32 shrink-0'>
+								<div className='w-22 h-20 shrink-0'>
 									<img
 										src={sneaker.image}
 										alt={sneaker.fullName}
@@ -98,6 +116,7 @@ const ShoppingBag = () => {
 									</div>
 
 									{/* Quantity controls */}
+
 									<div className='flex items-center gap-4'>
 										<div className='flex items-center gap-2 border border-gray-300 rounded-lg'>
 											<button
@@ -144,8 +163,8 @@ const ShoppingBag = () => {
 					})}
 
 					{/* Total price */}
-					<div className='border-t-2 border-gray-300 pt-6 mt-6'>
-						<div className='flex justify-between items-center text-xl md:text-2xl font-bold'>
+					<div className='border-t-2 border-gray-300 pt-3 mt-6'>
+						<div className='flex justify-between items-center text-xl font-bold'>
 							<span>Celková cena:</span>
 							<span>{price.toLocaleString('cs-CZ')} Kč</span>
 						</div>

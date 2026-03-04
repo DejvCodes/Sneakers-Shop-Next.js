@@ -27,7 +27,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 		if (!slug) return;
 		// find product by slug
 		const findProductDetails: Sneaker | undefined = sneakers.find((oneProduct) => {
-			return oneProduct.slug === slug
+			return oneProduct.slug === slug;
 		})
 		if (findProductDetails) {
 			setProductDetails(findProductDetails);
@@ -62,6 +62,8 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
 			productId: id,
 			quantity: quantity
 		}));
+		// reset quantity to 1
+		setQuantity(1);
 		// dispatch show notification action
 		dispatch(showNotification());
 		// hide notification

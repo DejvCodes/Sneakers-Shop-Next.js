@@ -13,13 +13,11 @@ const publicSans = Public_Sans({
 export const metadata: Metadata = {
 	title: 'Sneakers Shop',
 	description: 'Your one-stop shop for the latest and greatest sneakers.',
+	icons: '/favicon.png',
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return <html lang='cz'>
-		<head>
-			<link rel='shortcut icon' href='/favicon.png' type='image/x-icon' />
-		</head>
 		<body className={`${publicSans.className} antialiased bg-black`}>
 			<Providers>
 				<Header />

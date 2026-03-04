@@ -17,7 +17,9 @@ const Products = () => {
 		setFilteredProducts(productsAfterFilter);
 	}, [searchingProduct]);
 
-	return <section className='w-full max-w-7xl flex items-center justify-center my-20 mx-auto px-4'>
+	return <section
+		className='w-full max-w-7xl flex items-center justify-center my-20 mx-auto px-4'
+	>
 		<div className='flex flex-col items-center justify-center'>
 			<div className='w-125 max-w-[calc(100vw-24px)] text-xl border border-black/15 flex items-center mb-6 md:mb-8 p-2.5'>
 				<input
